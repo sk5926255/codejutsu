@@ -8,14 +8,13 @@ import getBlogs from '../actions/getBlogs';
 export default async function HomePage() {
   const blogs = await getBlogs();
 
-  console.log(blogs, 'blogs');
   return (
     <>
       <Container size="xxxxl">
         <>
           <Flex gap={12}>
             <Box flex={2}>
-              <HomeBlogsContainer />
+              <HomeBlogsContainer blogs={blogs} />
             </Box>
             <Box flex={1} className={`${classes.sideContent}`}>
               <SideTags />
@@ -23,7 +22,6 @@ export default async function HomePage() {
           </Flex>
         </>
       </Container>
-
       <ColorSchemeToggle />
     </>
   );

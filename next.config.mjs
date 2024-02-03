@@ -7,7 +7,10 @@ const withBundleAnalyzer = bundleAnalyzer({
 export default withBundleAnalyzer({
   reactStrictMode: false,
   images: {
-    remotePatterns: [{ protocol: 'https', hostname: 'robohash.org' }],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'robohash.org' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,

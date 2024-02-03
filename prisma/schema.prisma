@@ -22,6 +22,7 @@ model User {
   avatarUrl String
   website   String
   createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   posts     Post[]
   comments  Comment[]
   likes     Like[]
@@ -31,6 +32,7 @@ model Post {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   title         String
   content       String
+  imageUrl      String
   published     Boolean   @default(false)
   publishedDate DateTime
   description   String
@@ -38,6 +40,7 @@ model Post {
   author        User      @relation(fields: [authorId], references: [id])
   categories    String[]
   createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   tags          String[]
   comments      Comment[] @relation("PostToComment")
   likes         Like[]

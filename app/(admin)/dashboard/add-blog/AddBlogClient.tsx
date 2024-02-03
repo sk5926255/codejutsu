@@ -16,6 +16,7 @@ const AddBlogClient = () => {
       description: '',
       content: '',
       tags: '',
+      image: '',
     },
   });
 
@@ -67,12 +68,11 @@ const AddBlogClient = () => {
           required
           label="Blog tags"
           rows={8}
+          mb={12}
           placeholder="add you blog tags here..."
           {...form.getInputProps('tags')}
         />
-
         <TextEditor setDescription={(content) => form.setFieldValue('content', content)} />
-        {/* <TextEditor content={form.values.content} onChange={form.setFieldValue('content')} /> */}
         <Group justify="flex-end" mt="md">
           <Button type="submit" variant="filled" bg="main.1">
             Submit

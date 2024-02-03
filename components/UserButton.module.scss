@@ -4,3 +4,10 @@
     display: block;
       }
 }
+.rightArrow {
+  display: none;
+  @media (min-width: $mantine-breakpoint-sm){
+    display: block;
+    color: var(--mantine-color-main-9);
+  }
+}

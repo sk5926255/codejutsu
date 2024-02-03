@@ -1,6 +1,15 @@
 .card {
   background-color: var(--mantine-color-body);
 }
+.flex {
+  display: flex;
+  flex-direction: column;
+   @media (min-width: $mantine-breakpoint-sm) {
+    flex-direction: row;
+    width: 100%;
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  }
+}
 
 .title {
   font-weight: bold;
@@ -13,6 +22,7 @@
 .body {
   padding: var(--mantine-spacing-md);
 }
+
 
 
 // .card {
@@ -35,6 +45,16 @@
 
 .action {
   background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
+
+  .heart {
+  color: var(--mantine-color-red-5);
+}
+  .bookmark {
+  color: var(--mantine-color-yellow-5);
+}
+  .share {
+  color: var(--mantine-color-blue-5);
+}
 
   @mixin hover {
     background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));

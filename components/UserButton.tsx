@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { IconChevronRight } from '@tabler/icons-react';
-import { Group, Avatar, Text, UnstyledButton } from '@mantine/core';
+import { IconChevronDown } from '@tabler/icons-react';
+import { Group, Avatar, Text, UnstyledButton, Flex } from '@mantine/core';
 import classes from './UserButton.module.scss';
 
 interface UserButtonProps extends React.ComponentPropsWithoutRef<'button'> {
@@ -23,24 +23,32 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
       {...others}
     >
       <Group>
-        <Avatar src={image} radius="xl" size="md" variant="filled" />
-
-        <div style={{ flex: 1 }} className={`${classes.userInfo}`}>
-          <Text
+        <Flex align="center" gap={8} mr={-10}>
+          <Avatar
+            src={image}
+            radius="xl"
             size="md"
-            fw={600}
-            style={{ textTransform: 'capitalize' }}
-            c={client ? 'white' : 'main.9'}
-          >
-            {name}
-          </Text>
+            variant="filled"
+            style={{ border: '1px solid white' }}
+          />
 
-          <Text c={client ? 'white' : 'dimmed'} size="xs">
-            {email}
-          </Text>
-        </div>
+          <div style={{ flex: 1 }} className={`${classes.userInfo}`}>
+            <Text
+              size="md"
+              fw={600}
+              style={{ textTransform: 'capitalize' }}
+              c={client ? 'white' : 'main.9'}
+            >
+              {name}
+            </Text>
 
-        {/* {icon || <IconChevronRight size="1rem" />} */}
+            <Text c={client ? 'white' : 'dimmed'} size="xs">
+              {email}
+            </Text>
+          </div>
+        </Flex>
+
+        {icon || <IconChevronDown size="1.5rem" className={classes.rightArrow} />}
       </Group>
     </UnstyledButton>
   )
