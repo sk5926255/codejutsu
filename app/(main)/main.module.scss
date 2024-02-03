@@ -1,0 +1,7 @@
+.sideContent {
+    display: none;
+    position: relative;
+      @media (min-width: $mantine-breakpoint-sm) {
+    display: block;
+      }
+}

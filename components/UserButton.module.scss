@@ -1,0 +1,6 @@
+.userInfo {
+    display: none;
+      @media (min-width: $mantine-breakpoint-sm) {
+    display: block;
+      }
+}

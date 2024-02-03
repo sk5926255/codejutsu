@@ -1,0 +1,11 @@
+.register {
+    border-radius: 100px;
+}
+
+.invalid {
+  background-color: var(--mantine-color-red-light);
+}
+
+.icon {
+  color: light-dark(var(--mantine-color-red-6), var(--mantine-color-red-7));
+}
