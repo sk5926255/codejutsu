@@ -25,6 +25,7 @@ export interface BlogData {
   description: string;
   content: string;
   tags: string;
+  image: File | null;
 }
 
 export interface Post {

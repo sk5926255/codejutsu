@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
+import multer from 'multer';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import prisma from '@/lib/prismadb';
+
+const upload = multer({ dest: 'uploads/' });
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -29,8 +32,6 @@ export async function POST(request: Request) {
         author: {
           connect: { id: currentUser.id },
         },
-        // both do same work
-        // authorId: currentUser.id,
         categories: categoriesArray,
       },
     });
