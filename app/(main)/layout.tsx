@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
 
 export const metadata: Metadata = {
   title: 'Front',
@@ -14,6 +15,7 @@ export default async function FrontLayout({ children }: { children: React.ReactN
     <>
       <Header currentUser={currentUser} />
       {children}
+      <Footer />
     </>
   );
 }

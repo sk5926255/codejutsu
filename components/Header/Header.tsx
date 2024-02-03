@@ -21,6 +21,7 @@ import {
   Title,
   Container,
   Menu,
+  Flex,
 } from '@mantine/core';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import { useDisclosure } from '@mantine/hooks';
@@ -176,10 +177,16 @@ export default function Header({ currentUser }: HeaderProps) {
                 >
                   Sign up
                 </Button>
-                {/* <Register /> */}
+                <Burger
+                  color="white"
+                  size="lg"
+                  opened={drawerOpened}
+                  onClick={toggleDrawer}
+                  hiddenFrom="sm"
+                />
               </Group>
             ) : (
-              <>
+              <Flex align="center">
                 <Menu shadow="md" offset={-16} width={200} withArrow>
                   <Menu.Target>
                     <UserButton
@@ -236,15 +243,15 @@ export default function Header({ currentUser }: HeaderProps) {
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
-              </>
+                <Burger
+                  color="white"
+                  size="lg"
+                  opened={drawerOpened}
+                  onClick={toggleDrawer}
+                  hiddenFrom="sm"
+                />
+              </Flex>
             )}
-            <Burger
-              color="white"
-              size="lg"
-              opened={drawerOpened}
-              onClick={toggleDrawer}
-              hiddenFrom="sm"
-            />
           </Group>
         </Container>
       </header>

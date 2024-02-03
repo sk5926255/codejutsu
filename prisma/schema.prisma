@@ -21,6 +21,7 @@ model User {
   bio       String
   avatarUrl String
   website   String
+  createdAt DateTime  @default(now())
   posts     Post[]
   comments  Comment[]
   likes     Like[]
@@ -36,9 +37,10 @@ model Post {
   authorId      String    @db.ObjectId
   author        User      @relation(fields: [authorId], references: [id])
   categories    String[]
+  createdAt     DateTime  @default(now())
   tags          String[]
   comments      Comment[] @relation("PostToComment")
-  likes         Like[] // Use plural form for related models
+  likes         Like[]
 }
 
 model Comment {
