@@ -203,7 +203,7 @@ export default function Header({ currentUser }: HeaderProps) {
 
                   <Menu.Dropdown>
                     <Menu.Label>General</Menu.Label>
-                    {currentUser.role === 'admin' && (
+                    {currentUser.role === 'ADMIN' && (
                       <Menu.Item
                         component={Link}
                         href="/dashboard"

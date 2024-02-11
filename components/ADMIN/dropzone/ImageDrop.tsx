@@ -7,8 +7,10 @@ import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 const ImageDrop = (props: Partial<DropzoneProps>) => (
   <Dropzone
     onDrop={(files) => {
+      // eslint-disable-next-line no-console
       console.log('accepted files', files);
     }}
+    // eslint-disable-next-line no-console
     onReject={(files) => console.log('rejected files', files)}
     maxSize={5 * 1024 ** 2}
     accept={IMAGE_MIME_TYPE}

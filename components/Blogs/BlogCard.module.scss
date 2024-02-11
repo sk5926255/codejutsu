@@ -18,6 +18,13 @@
     var(--mantine-font-family);
   line-height: 1.2;
 }
+.image {
+  max-height: 200px;
+  @media  (min-width: $mantine-breakpoint-sm) {
+    max-width: 355px;
+    min-width: 320px;
+  }
+}
 
 .body {
   padding: var(--mantine-spacing-md);

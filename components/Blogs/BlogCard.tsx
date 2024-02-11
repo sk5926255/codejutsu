@@ -10,12 +10,7 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => (
   <Card withBorder radius="md" p={0} className={classes.card}>
     <Group wrap="nowrap" gap={0} className={classes.flex}>
-      <Image
-        src={blog?.imageUrl}
-        // src="https://images.unsplash.com/photo-1602080858428-57174f9431cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80"
-        height={200}
-        alt="Something"
-      />
+      <Image src={blog?.imageUrl} height={200} alt="Something" className={classes.image} />
       <div className={classes.body}>
         <Text tt="uppercase" c="dimmed" fw={700} size="xs">
           technology

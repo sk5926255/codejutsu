@@ -22,12 +22,12 @@ const AdminHeader = ({ currentUser }: AdminHeaderProps) => (
       <Menu.Target>
         <UserButton
           image={
-            currentUser.avatarUrl
+            currentUser?.avatarUrl
               ? currentUser.avatarUrl
               : 'https://robohash.org/16efc4a1d030beb457bc3af5b07507a4?set=set4&bgset=&size=400x400'
           }
-          name={currentUser.name}
-          email={currentUser.email}
+          name={currentUser?.name}
+          email={currentUser?.email}
         />
       </Menu.Target>
 

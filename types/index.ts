@@ -25,6 +25,8 @@ export interface BlogData {
   description: string;
   content: string;
   tags: string;
+  category: String;
+  newCategory: String;
   image: File | null;
 }
 

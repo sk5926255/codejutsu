@@ -1,5 +1,70 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// // This is your Prisma schema file,
+// // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// generator client {
+//   provider = "prisma-client-js"
+// }
+
+// datasource db {
+//   provider = "mongodb"
+//   url      = env("DATABASE_URL")
+// }
+
+// model User {
+//   id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//   username  String    @unique
+//   email     String    @unique
+//   password  String?
+//   googleId  String?
+//   name      String
+//   role      String    @default("user")
+//   bio       String
+//   avatarUrl String
+//   website   String
+//   createdAt DateTime  @default(now())
+//   updatedAt DateTime  @updatedAt
+//   posts     Post[]
+//   comments  Comment[]
+//   likes     Like[]
+// }
+
+// model Post {
+//   id            String    @id @default(auto()) @map("_id") @db.ObjectId
+//   title         String
+//   content       String
+//   imageUrl      String
+//   published     Boolean   @default(false)
+//   publishedDate DateTime
+//   description   String
+//   authorId      String    @db.ObjectId
+//   author        User      @relation(fields: [authorId], references: [id])
+//   categories    String[]
+//   createdAt     DateTime  @default(now())
+//   updatedAt     DateTime  @updatedAt
+//   tags          String[]
+//   comments      Comment[] @relation("PostToComment")
+//   likes         Like[]
+// }
+
+// model Comment {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   content   String
+//   postId    String   @db.ObjectId
+//   post      Post     @relation("PostToComment", fields: [postId], references: [id], onDelete: Cascade)
+//   authorId  String   @db.ObjectId
+//   author    User     @relation(fields: [authorId], references: [id])
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model Like {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   postId    String   @db.ObjectId
+//   post      Post     @relation(fields: [postId], references: [id])
+//   userId    String   @db.ObjectId
+//   user      User     @relation(fields: [userId], references: [id])
+//   createdAt DateTime @default(now())
+// }
 
 generator client {
   provider = "prisma-client-js"
@@ -11,39 +76,43 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  username  String    @unique
-  email     String    @unique
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  username  String     @unique
+  email     String     @unique
   password  String?
   googleId  String?
   name      String
-  role      String    @default("user")
+  role      UserRole   @default(READER)
   bio       String
   avatarUrl String
   website   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
   posts     Post[]
   comments  Comment[]
   likes     Like[]
+  Wishlist  Wishlist[]
+  Bookmark  Bookmark[]
 }
 
 model Post {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
   title         String
   content       String
   imageUrl      String
-  published     Boolean   @default(false)
+  published     Boolean        @default(false)
   publishedDate DateTime
   description   String
-  authorId      String    @db.ObjectId
-  author        User      @relation(fields: [authorId], references: [id])
-  categories    String[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  tags          String[]
-  comments      Comment[] @relation("PostToComment")
+  authorId      String         @db.ObjectId
+  author        User           @relation(fields: [authorId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  tags          TagPost[]
+  comments      Comment[]      @relation("PostToComment")
   likes         Like[]
+  Wishlist      Wishlist[]
+  Bookmark      Bookmark[]
+  Categories    CategoryPost[]
 }
 
 model Comment {
@@ -64,4 +133,80 @@ model Like {
   userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
+}
+
+model Category {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  name      String         @unique
+  slug      String
+  score     Int            @default(0)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  approved  Boolean        @default(false)
+  parentId  String?        @db.ObjectId
+  parent    Category?      @relation("CategoryToCategory", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children  Category[]     @relation("CategoryToCategory")
+  posts     CategoryPost[]
+}
+
+model CategoryPost {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @db.ObjectId
+  post       Post     @relation(fields: [postId], references: [id])
+  postId     String   @db.ObjectId
+  score      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([categoryId, postId])
+}
+
+model Tag {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String    @unique
+  slug      String
+  score     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  posts     TagPost[]
+}
+
+model TagPost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  tag       Tag      @relation(fields: [tagId], references: [id])
+  tagId     String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @db.ObjectId
+  score     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tagId, postId])
+}
+
+model Wishlist {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Bookmark {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  READER
+  WRITER
+  ADMIN
 }

@@ -71,7 +71,6 @@ export default function AuthenticationForm(props: PaperProps) {
         console.log(error, 'an error occured');
       }
     } else {
-      alert('login');
       try {
         // setIsLoading(true);
         signIn('credentials', {
