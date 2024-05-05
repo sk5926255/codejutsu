@@ -25,8 +25,8 @@ export interface BlogData {
   description: string;
   content: string;
   tags: string;
-  category: String;
-  newCategory: String;
+  category: string;
+  newCategory: string;
   image: File | null;
 }
 
@@ -42,14 +42,12 @@ export interface PostCard {
   author: {
     name: string;
   };
-  Categories:
-    { category: { name: string; }; }[];
+  Categories: { category: { name: string } }[];
   createdAt: Date;
-  tags:
-    {
-      tag: {
-        name: string;
-    }
+  tags: {
+    tag: {
+      name: string;
+    };
   }[];
 }
 

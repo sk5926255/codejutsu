@@ -29,10 +29,10 @@ const AddBlogClient: React.FC<AddBlogClientProps> = ({ categories }) => {
       title: '',
       description: '',
       content: '',
-      tags: [] as string[],
+      tags: '' as string,
       image: null as File | null,
-      category: '',
-      newCategory: '',
+      category: '' as string,
+      newCategory: '' as string,
     },
   });
 
@@ -64,7 +64,6 @@ const AddBlogClient: React.FC<AddBlogClientProps> = ({ categories }) => {
   };
 
   const onPostSubmit = async (data: BlogData) => {
-    console.log(data, 'blog data');
     if (data.image === null) {
       notifications.show({
         title: 'Error',
@@ -76,7 +75,6 @@ const AddBlogClient: React.FC<AddBlogClientProps> = ({ categories }) => {
     try {
       const formData = new FormData();
 
-      // Append text data
       formData.append('title', data.title);
       formData.append('description', data.description);
       formData.append('content', data.content);
