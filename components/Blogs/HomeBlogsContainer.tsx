@@ -2,10 +2,10 @@
 
 import { Grid } from '@mantine/core';
 import BlogCard from './BlogCard';
-import { Post } from '@/types';
+import { PostCard } from '@/types';
 
 interface HomeBlogsContainerProps {
-  blogs: Post[];
+  blogs: PostCard[];
 }
 
 const HomeBlogsContainer: React.FC<HomeBlogsContainerProps> = ({ blogs }) => (

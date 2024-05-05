@@ -15,7 +15,7 @@ export interface UserType {
   avatarUrl: string;
   website: string;
   createdAt: Date;
-  posts: Post[];
+  posts: PostCard[];
   comments: Comment[];
   likes: Like[];
 }
@@ -30,7 +30,7 @@ export interface BlogData {
   image: File | null;
 }
 
-export interface Post {
+export interface PostCard {
   id: string;
   title: string;
   content: string;
@@ -39,19 +39,25 @@ export interface Post {
   publishedDate: Date;
   description: string;
   authorId: string;
-  author: UserType;
-  categories: string[];
+  author: {
+    name: string;
+  };
+  Categories:
+    { category: { name: string; }; }[];
   createdAt: Date;
-  tags: string[];
-  comments: Comment[];
-  likes: Like[];
+  tags:
+    {
+      tag: {
+        name: string;
+    }
+  }[];
 }
 
 export interface Comment {
   id: string;
   content: string;
   postId: string;
-  post: Post;
+  post: PostCard;
   authorId: string;
   author: UserType;
   createdAt: Date;
@@ -61,7 +67,7 @@ export interface Comment {
 export interface Like {
   id: string;
   postId: string;
-  post: Post;
+  post: PostCard;
   userId: string;
   user: UserType;
   createdAt: Date;

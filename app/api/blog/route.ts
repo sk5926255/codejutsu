@@ -57,9 +57,6 @@ export async function POST(request: Request) {
       });
 
       if (tags) {
-        console.log(tags, 'tag created from if');
-        console.log('new category', newCategory);
-        console.log('category', category);
         try {
           await Promise.all(
             tags.map(async (tagName) => {

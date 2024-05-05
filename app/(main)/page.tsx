@@ -3,10 +3,12 @@ import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeTog
 import HomeBlogsContainer from '@/components/Blogs/HomeBlogsContainer';
 import classes from './main.module.scss';
 import SideTags from '@/components/SideTags';
-import getBlogs from '../actions/getBlogs';
+import getBlogsForCards from '../actions/getBlogsForCards';
 
 export default async function HomePage() {
-  const blogs = await getBlogs();
+  const blogs = await getBlogsForCards();
+
+  console.log(blogs)
 
   return (
     <>

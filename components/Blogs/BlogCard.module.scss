@@ -17,6 +17,9 @@
     Greycliff CF,
     var(--mantine-font-family);
   line-height: 1.2;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .image {
   max-height: 200px;

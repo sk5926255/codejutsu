@@ -1,24 +1,29 @@
 import { Card, Image, Avatar, Text, Group, ActionIcon, rem, Flex, Title } from '@mantine/core';
 import { IconBookmark, IconHeart, IconShare } from '@tabler/icons-react';
 import classes from './BlogCard.module.scss';
-import { Post } from '@/types';
+import { PostCard } from '@/types';
+import { useRouter } from 'next/navigation';
 
 interface BlogCardProps {
-  blog: Post;
+  blog: PostCard;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ blog }) => (
-  <Card withBorder radius="md" p={0} className={classes.card}>
+const BlogCard: React.FC<BlogCardProps> = ({ blog }) =>
+  {
+const router = useRouter();
+
+    return   (
+  <Card withBorder radius="md" p={0} className={classes.card} >
     <Group wrap="nowrap" gap={0} className={classes.flex}>
       <Image src={blog?.imageUrl} height={200} alt="Something" className={classes.image} />
       <div className={classes.body}>
         <Text tt="uppercase" c="dimmed" fw={700} size="xs">
-          technology
+        {blog?.Categories[0]?.category.name}
         </Text>
-        <Title className={classes.title} size="lg" mt="xs" lineClamp={2}>
+        <Title className={classes.title} size="lg" mt="xs" lineClamp={2} onClick={() => router.push(`/blog[slug]/${blog.id}`)}>
           {blog?.title}
         </Title>
-        <Text mb="xs" size="md" lineClamp={3}>
+        <Text mb="xs" size="md" lineClamp={4}>
           {blog?.description}
         </Text>
         <Flex align="center" justify="space-between" wrap="nowrap" gap="xs">
@@ -27,13 +32,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => (
               size={20}
               src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
             />
-            <Text size="xs">Elsa Typechecker</Text>
+            <Text size="xs">{blog.author.name}</Text>
             <Text size="xs" c="dimmed">
-              •
-            </Text>
-            <Text size="xs" c="dimmed">
-              {blog?.author?.name}
-              feb,11,2023
+              {blog.createdAt.toDateString()}
             </Text>
           </Group>
           <Group gap={8} mr={0}>
@@ -54,5 +55,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => (
       </div>
     </Group>
   </Card>
-);
+)
+  };
 export default BlogCard;
