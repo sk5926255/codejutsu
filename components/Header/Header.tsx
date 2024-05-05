@@ -43,7 +43,7 @@ import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import classes from './header.module.scss';
 import SquareButton from '../ui/Buttons/SquareButton';
-import { UserType } from '@/types';
+import { CurrentUserType } from '@/types';
 import UserButton from '../UserButton';
 
 const mockdata = [
@@ -80,7 +80,7 @@ const mockdata = [
 ];
 
 type HeaderProps = {
-  currentUser: UserType | null;
+  currentUser: CurrentUserType | null;
 };
 
 export default function Header({ currentUser }: HeaderProps) {

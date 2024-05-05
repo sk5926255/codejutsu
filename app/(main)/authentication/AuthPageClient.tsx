@@ -24,6 +24,13 @@ import { signIn } from 'next-auth/react';
 import { GoogleButton } from './GoogleButton';
 import { baseUrl } from '@/constants';
 
+interface RegisterDataType {
+  name: string;
+  email: string;
+  password: string;
+  terms: boolean;
+}
+
 export default function AuthenticationForm(props: PaperProps) {
   const [type, toggle] = useToggle(['login', 'register']);
   const router = useRouter();
@@ -41,7 +48,7 @@ export default function AuthenticationForm(props: PaperProps) {
     },
   });
 
-  const registerMutation = useMutation((data) =>
+  const registerMutation = useMutation((data: RegisterDataType) =>
     fetch(`${baseUrl}/register`, {
       method: 'POST',
       headers: {
@@ -51,7 +58,7 @@ export default function AuthenticationForm(props: PaperProps) {
     })
   );
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: RegisterDataType) => {
     if (type === 'register') {
       try {
         const response = await registerMutation.mutateAsync(data);
