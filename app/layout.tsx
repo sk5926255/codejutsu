@@ -2,7 +2,7 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dropzone/styles.css';
 import { Notifications } from '@mantine/notifications';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 import { ReactQueryClientProvider } from '@/providers/ReactQueryClientProvide';
@@ -24,12 +24,14 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <ReactQueryClientProvider>
-          <MantineProvider theme={theme} withCssVariables>
-            <Notifications />
-            {children}
-          </MantineProvider>
-        </ReactQueryClientProvider>
+        <Suspense>
+          <ReactQueryClientProvider>
+            <MantineProvider theme={theme} withCssVariables>
+              <Notifications />
+              {children}
+            </MantineProvider>
+          </ReactQueryClientProvider>
+        </Suspense>
       </body>
     </html>
   );
