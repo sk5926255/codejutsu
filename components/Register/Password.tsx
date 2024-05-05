@@ -41,10 +41,10 @@ function getStrength(password: string) {
 
 interface PasswordProps {
   password: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  // onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Password({ password, onChnage }: PasswordProps) {
+export default function Password({ password }: PasswordProps) {
   const [popoverOpened, setPopoverOpened] = useState(false);
   const [value, setValue] = useState('');
   const checks = requirements.map((requirement, index) => (
