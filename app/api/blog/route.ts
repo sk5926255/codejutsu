@@ -40,14 +40,14 @@ export async function POST(request: Request) {
   if (response && response.secure_url) {
     try {
       const tags = formData.get('tags')?.toString().split(',');
-      const category = formData.get('category');
-      const newCategory = formData.get('newCategory');
+      const category = formData.get('category') as string;
+      const newCategory = formData.get('newCategory') as string;
 
       const createdPost = await prisma.post.create({
         data: {
-          title: formData.get('title'),
-          description: formData.get('description'),
-          content: formData.get('content'),
+          title: formData.get('title') as string,
+          description: formData.get('description') as string,
+          content: formData.get('content') as string,
           publishedDate: new Date(),
           author: {
             connect: { id: currentUser.id },
@@ -82,8 +82,6 @@ export async function POST(request: Request) {
 
       try {
         if (newCategory) {
-          console.log('new category', newCategory);
-          console.log('from other ');
           const slug = newCategory.toLowerCase().replace(/ /g, '-');
           const createdCategory = await prisma.category.create({
             data: {
@@ -100,7 +98,6 @@ export async function POST(request: Request) {
             },
           });
         } else {
-          console.log('existing category', category);
           const existingCategory = await prisma.category.findUnique({
             where: { name: category },
           });
@@ -112,12 +109,14 @@ export async function POST(request: Request) {
             });
           }
 
-          await prisma.categoryPost.create({
-            data: {
-              categoryId: existingCategory.id,
-              postId: createdPost.id,
-            },
-          });
+          if (existingCategory?.id) {
+            await prisma.categoryPost.create({
+              data: {
+                categoryId: existingCategory.id,
+                postId: createdPost.id,
+              },
+            });
+          }
         }
       } catch (error) {
         console.log(error, 'something went wrong');

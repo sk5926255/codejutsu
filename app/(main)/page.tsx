@@ -8,8 +8,6 @@ import getBlogsForCards from '../actions/getBlogsForCards';
 export default async function HomePage() {
   const blogs = await getBlogsForCards();
 
-  console.log(blogs)
-
   return (
     <>
       <Container size="xxxxl">
