@@ -4,12 +4,12 @@ import React from 'react';
 import { AppShell, Burger, Flex } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import AdminSidebar from '@/components/ADMIN/sidebar/AdminSidebar';
-import { UserType } from '@/types';
+import { CurrentUserType } from '@/types';
 import AdminHeader from '@/components/ADMIN/header/AdminHeader';
 
 interface Props {
   children: React.ReactNode;
-  currentUser: UserType;
+  currentUser: CurrentUserType | null;
 }
 
 const DashboardLayout = ({ children, currentUser }: Props) => {

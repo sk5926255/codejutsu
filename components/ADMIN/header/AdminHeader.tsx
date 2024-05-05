@@ -7,11 +7,11 @@ import {
   IconHome,
 } from '@tabler/icons-react';
 import Link from 'next/link';
-import { UserType } from '@/types';
+import { CurrentUserType } from '@/types';
 import UserButton from '@/components/UserButton';
 
 interface AdminHeaderProps {
-  currentUser: UserType;
+  currentUser: CurrentUserType | null;
 }
 
 const AdminHeader = ({ currentUser }: AdminHeaderProps) => (
@@ -26,8 +26,8 @@ const AdminHeader = ({ currentUser }: AdminHeaderProps) => (
               ? currentUser.avatarUrl
               : 'https://robohash.org/16efc4a1d030beb457bc3af5b07507a4?set=set4&bgset=&size=400x400'
           }
-          name={currentUser?.name}
-          email={currentUser?.email}
+          name={currentUser?.name || ''}
+          email={currentUser?.email || ''}
         />
       </Menu.Target>
 

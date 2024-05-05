@@ -20,6 +20,21 @@ export interface UserType {
   likes: Like[];
 }
 
+export interface CurrentUserType {
+  id: string;
+  username: string;
+  email: string;
+  password: string | null;
+  googleId: string | null;
+  name: string;
+  role: 'ADMIN' | 'READER' | 'WRITER';
+  bio: string;
+  avatarUrl: string;
+  website: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface BlogData {
   title: string;
   description: string;
