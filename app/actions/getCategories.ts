@@ -9,7 +9,8 @@ export default async function getCategories() {
     });
 
     return categories;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw new Error('Failed to fetch categories');
   }
 }
